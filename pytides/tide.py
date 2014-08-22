@@ -14,6 +14,8 @@ import constituent
 
 d2r, r2d = np.pi/180.0, 180.0/np.pi
 
+def get_total_seconds(td): return (td.microseconds + (td.seconds + td.days * 24 * 3600) * 1e6) / 1e6
+
 class Tide(object):
 	dtype = np.dtype([
 		('constituent', object),
@@ -221,7 +223,7 @@ class Tide(object):
 		if not isinstance(t, Iterable):
 			return Tide._hours(t0, [t])[0]
 		elif isinstance(t[0], datetime):
-			return np.array([(ti-t0).total_seconds() / 3600.0 for ti in t])
+			return np.array([get_total_seconds((ti-t0)) / 3600.0 for ti in t])
 		else:
 			return t
 
