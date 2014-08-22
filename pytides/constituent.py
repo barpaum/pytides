@@ -12,7 +12,7 @@ class BaseConstituent(object):
 		'Z': 0
 	}
 
-	int_xdo = {v:k for k, v in xdo_int.items()}
+	int_xdo = dict((v,k) for (k,v) in xdo_int.items())
 
 	def __init__(self, name, xdo='', coefficients=[], u=nc.u_zero, f=nc.f_unity):
 		if xdo == '':
